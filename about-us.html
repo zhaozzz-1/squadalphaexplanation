@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us and Comment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        #comment-section {
+            margin-top: 20px;
+        }
+
+       .comment {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">anti corruption</a>
+        <a href="reasons.html">reasons</a>
+        <a href="about-us.html">about us</a>
+    </nav>
+    <section>
+        <h2>What effect corruption has on the youth</h2>
+        <p>there are various reasons why we choose for youth to fight agist corruption:
+        </p>
+        <p>1) They are the future leaders. Todays youth will shape tommorows society,corruption-free leadership starts with them<br>
+           2）Most vulnerable to corruption. Limited job opportunites,baised education system, and social inequality often affect young people.<br>
+           3) Agents to change. Youth are energetic,innocative, and influentia.Mobilizing then can bring real change.<br>
+        
+        The youth are the hammer that will break corruption that is why we as the youth should stand againt those who oppress and lie to us.</p><br>
+    </section>
+    <section>
+        <h2>Team Members</h2>
+        <p>
+            <strong>simi</strong><br>
+            [Team leader making sure every one is up to date and doing the work ]
+        </p>
+        <p>
+            <strong>Jie</strong><br>
+            [Responsible for poster and website production]  
+        </p>
+        <p>
+            <strong>Peris</strong><br>
+            [In charge of creating and managing meetings and the google classroom]
+        </p>
+    </section>
+    <section id="comment-section">
+        <h2>Leave a Comment</h2>
+        <textarea id="comment-input" placeholder="Your comment here"></textarea>
+        <button onclick="postComment()">Submit Comment</button>
+        <div id="comments"></div>
+    </section>
+
+    <script>
+        function postComment() {
+            const commentInput = document.getElementById('comment-input');
+            const commentText = commentInput.value.trim();
+
+            if (commentText === '') {
+                alert('Please enter a comment');
+                return;
+            }
+
+            const comments = JSON.parse(localStorage.getItem('comments')) || [];
+            const newComment = {
+                text: commentText,
+                timestamp: new Date().getTime()
+            };
+            comments.push(newComment);
+            localStorage.setItem('comments', JSON.stringify(comments));
+
+            displayComments();
+            commentInput.value = '';
+        }
+
+        function displayComments() {
+            const commentsDiv = document.getElementById('comments');
+            commentsDiv.innerHTML = '';
+
+            const comments = JSON.parse(localStorage.getItem('comments')) || [];
+            comments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.classList.add('comment');
+                commentElement.innerHTML = `<p>${comment.text}</p><small>${new Date(comment.timestamp).toLocaleString()}</small>`;
+                commentsDiv.appendChild(commentElement);
+            });
+        }
+
+        window.onload = function () {
+            displayComments();
+        };
+    </script>
+</body>
+
+</html>
